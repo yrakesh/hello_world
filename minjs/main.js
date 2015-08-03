@@ -1,0 +1,1 @@
+function User(e,s){return this===window?new User(e,s):(this.name=e+" "+s,this)}var name="Lalit Negi",user1=new User("Arun","Arya");console.log("global name",name),console.log(user1);var user2=User("Vishal","Dhadve");console.log(user2);
