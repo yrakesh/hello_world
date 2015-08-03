@@ -1,8 +1,9 @@
 // STEP 4 & 5
 /**/
-var gulp   = require('gulp'),
-    uglify = require('gulp-uglify'),
-	sass   = require('gulp-ruby-sass');
+var gulp   		= require('gulp'),
+    uglify 		= require('gulp-uglify'),
+	sass   		= require('gulp-sass'),
+	livereload	= require('gulp-livereload');
 //
 gulp.task('scripts', function(){
 	var op= 
@@ -12,13 +13,16 @@ gulp.task('scripts', function(){
 });
 //
 gulp.task('sass', function(){
-	var op= sass('./scss/*.scss', {
-		style:'expanded'
-	}).on('error', console.error.bind(console));
-	return op.pipe(gulp.dest('./css/'));
+	return gulp.src('./scss/*.scss')
+				.pipe(sass())
+				.on('error', console.error.bind(console))
+				.pipe(gulp.dest('./css/'))
+				.pipe(livereload());
 });
 //
 gulp.task('watch', function(){
+	var server = livereload.listen();
+	//
     gulp.watch('js/*.js', ['scripts']);
     gulp.watch('scss/**/*.scss', ['sass']);
 });
