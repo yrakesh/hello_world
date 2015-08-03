@@ -3,6 +3,7 @@
 var gulp   		= require('gulp'),
     uglify 		= require('gulp-uglify'),
 	sass   		= require('gulp-sass'),
+	imagemin   	= require('gulp-imagemin'),
 	livereload	= require('gulp-livereload');
 //
 gulp.task('scripts', function(){
@@ -18,6 +19,12 @@ gulp.task('sass', function(){
 				.on('error', console.error.bind(console))
 				.pipe(gulp.dest('./css/'))
 				.pipe(livereload());
+});
+//
+gulp.task('image', function(){
+	return gulp.src('./img/*')
+				.pipe(imagemin())
+				.pipe(gulp.dest('./dest/img/'));
 });
 //
 gulp.task('watch', function(){
