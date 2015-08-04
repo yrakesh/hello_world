@@ -3,8 +3,9 @@
 var gulp   		= require('gulp'),
     uglify 		= require('gulp-uglify'),
 	sass   		= require('gulp-sass'),
+	livereload	= require('gulp-livereload'),
 	imagemin   	= require('gulp-imagemin'),
-	livereload	= require('gulp-livereload');
+	prefix		= require('gulp-autoprefixer');
 //
 gulp.task('scripts', function(){
 	var op= 
@@ -17,6 +18,7 @@ gulp.task('sass', function(){
 	return gulp.src('./scss/*.scss')
 				.pipe(sass())
 				.on('error', console.error.bind(console))
+				.pipe(prefix('last 2 versions'))
 				.pipe(gulp.dest('./css/'))
 				.pipe(livereload());
 });
